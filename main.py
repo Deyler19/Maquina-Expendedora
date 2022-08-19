@@ -11,6 +11,7 @@ num_patter = '^[0-9]+$'
 print("productos disponibles")
 
 producto= pd.read_csv('DB_CSV.csv')
+producto= producto.to_string(index=False)
 print (producto)
 
 while True:
@@ -19,22 +20,33 @@ while True:
         break
 while True:
     introducir_datos=input("que desea comprar?")
-    if re.fullmatch(lett_patter, introducir_datos):
+    if re.fullmatch(num_patter, introducir_datos):
         break
 
 with open('DB_CSV.csv', newline='',mode= 'r+') as db:
-    lector = csv.reader(db , delimiter=',')
-    for row in lector:
-        if introducir_datos in row[0]:
-            print(f' Producto seleccionado cuesta {row[1]} y usted cuenta con {introducir_dinero}')
-            if int(introducir_dinero) >= int(row[1]):
-                devuelta=int(introducir_dinero)-int(row[1])
-                print (f'su producto {row [0]} esta disponible, su cambio es {devuelta} ')
-            elif int(introducir_dinero) < int(row[1]):
-                    print ("echa ma' cualto maldito pobre")
+        lector = csv.reader(db , delimiter=',')
+        for row in lector:
+            if introducir_datos in row[0]:
+                print(f' Producto seleccionado cuesta {row[2]} y usted cuenta con {introducir_dinero}')
+                if int(introducir_dinero) >= int(row[2]):
+                    devuelta=int(introducir_dinero)-int(row[2])
+                    print (f'su producto {row [1]} esta disponible, su cambio es {devuelta} ')
                     break
-            else: print("Producto no encontrado")
-            break
+                elif int(introducir_dinero) < int(row[2]):
+                        print ("echa ma' cualto maldito pobre")
+                        break
+                else:
+                    print ("Producto no encontrado")
+
+
+
+
+
+
+
+
+
+
 
 
 
