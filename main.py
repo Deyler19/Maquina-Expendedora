@@ -35,8 +35,8 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
                 elif int(introducir_dinero) < int(row[2]):
                         print ("echa ma' cualto maldito pobre")
                         break
-                else:
-                    print ("Producto no encontrado")
+        else:
+            print ("Producto no encontrado, elige bien maldito animal")
 
 
 
