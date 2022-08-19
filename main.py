@@ -1,6 +1,11 @@
 import csv
 import pandas as pd
+import numpy as np
 import re
+
+dataset = []
+
+
 
 
 lett_patter = '^[A-Za-z]+$'
@@ -8,18 +13,14 @@ num_patter = '^[0-9]+$'
 
 lista_seleccion = []
 
-def escribir(li):
-    li = []
-    with open('DB_CSV.csv', newline='',mode= 'w') as db:
-        escritura = csv.writer(li)
-
-
 print("productos disponibles")
 
 producto= pd.read_csv('DB_CSV.csv')
-producto= producto.to_string(index=False)
-print (producto)
+# producto= producto.to_string(index=False)
+# print (producto)
+np_array = np.array(producto)
 
+print(np_array)
 
 while True:
     introducir_dinero=input("introduzca dinero ")
@@ -34,9 +35,11 @@ while True:
 with open('DB_CSV.csv', newline='',mode= 'r+') as db:
         lector = csv.reader(db , delimiter=',')
         linea  = lector.line_num
-        escritor = csv.writer(db,delimiter=",")
+        
         for row in lector:
-            if introducir_datos in row[0]:
+            introducir_datos_int = (int(introducir_datos))
+            if str(introducir_datos_int) in row[0]:
+                
                 stock = int(row[3])
 
                 if stock <= 0:
@@ -52,11 +55,13 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
                             remain = stock - 1
                             lista_seleccion.append(remain) 
                             devuelta=int(introducir_dinero)-int(row[2])
-                            linea_select = lector.line_num
-
-                            print(linea_select)
                             print (f'su producto {row [1]} esta disponible, su cambio es {devuelta} ')
 
+                            np_array[int(lista_seleccion[0])-1,3] = remain
+
+
+                            print(np_array)
+                            
                             break
                     elif int(introducir_dinero) < int(row[2]):
                         print ("echa ma' cualto maldito pobre")
@@ -64,7 +69,7 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
             
         else:
                 print ("Producto no encontrado, elige bien maldito animal")
-print(lista_seleccion,)
+
 
 
 
