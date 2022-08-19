@@ -1,4 +1,5 @@
 import csv
+from operator import delitem
 import pandas as pd
 import numpy as np
 import re
@@ -58,10 +59,11 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
                             print (f'su producto {row [1]} esta disponible, su cambio es {devuelta} ')
 
                             np_array[int(lista_seleccion[0])-1,3] = remain
-
+                            np_array = np_array
 
                             print(np_array)
                             
+
                             break
                     elif int(introducir_dinero) < int(row[2]):
                         print ("echa ma' cualto maldito pobre")
@@ -70,7 +72,7 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
         else:
                 print ("Producto no encontrado, elige bien maldito animal")
 
-
+np.savetxt('DB_CSV.csv',np_array, delimiter=",",fmt="%s",header="Codigo,Producto,Precio,Stock")
 
 
 
