@@ -1,6 +1,7 @@
-1,Cola real,20
-2,Sebeno,30
-3,agua perriel,65
-4,romo,250
-5,whiki,350
-6,nutela,450
+Codigo ,Producto,Precio,Stock
+1,Cola real,20,4
+2,Sebeno,30,5
+3,agua perriel,65,2
+4,romo,250,5
+5,whiki,350,2
+6,nutela,450,1
