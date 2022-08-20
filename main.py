@@ -1,24 +1,16 @@
 import csv
-from operator import delitem
 import pandas as pd
 import numpy as np
 import re
-
-dataset = []
-
-
 
 
 lett_patter = '^[A-Za-z]+$'
 num_patter = '^[0-9]+$'
 
-lista_seleccion = []
 
 print("productos disponibles")
 
 producto= pd.read_csv('DB_CSV.csv')
-# producto= producto.to_string(index=False)
-# print (producto)
 np_array = np.array(producto)
 
 print(np_array)
@@ -27,10 +19,10 @@ while True:
     introducir_dinero=input("introduzca dinero ")
     if re.fullmatch(num_patter, (introducir_dinero)):
         break 
+
 while True:
     introducir_datos=input("que desea comprar?")
     if re.fullmatch(num_patter, introducir_datos):
-        lista_seleccion.append(introducir_datos)
         break
 
 with open('DB_CSV.csv', newline='',mode= 'r+') as db:
@@ -51,22 +43,20 @@ with open('DB_CSV.csv', newline='',mode= 'r+') as db:
 
                     print(f' Producto seleccionado cuesta {row[2]} y usted cuenta con {introducir_dinero}')
                     if int(introducir_dinero) >= int(row[2]):
-                            lista_seleccion.append(row[1])
-                            lista_seleccion.append(row[2])
                             remain = stock - 1
-                            lista_seleccion.append(remain) 
                             devuelta=int(introducir_dinero)-int(row[2])
                             print (f'su producto {row [1]} esta disponible, su cambio es {devuelta} ')
 
-                            np_array[int(lista_seleccion[0])-1,3] = remain
+                            np_array[int(introducir_datos)-1,3] = remain
                             np_array = np_array
 
                             print(np_array)
                             
-
                             break
+
                     elif int(introducir_dinero) < int(row[2]):
                         print ("echa ma' cualto maldito pobre")
+                        
                         break
             
         else:
